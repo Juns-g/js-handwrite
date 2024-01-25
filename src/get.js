@@ -13,16 +13,23 @@ const object = { a: [{ b: { c: 3 } }] };
  * @return {*}
  */
 export function myGet(obj, path, defaultVal = undefined) {
+	if (obj === null) return defaultVal;
 	// 先用正则替换，然后split成数组
 	let arr = [];
-	arr = path.replace(/\[/g, '.').replace(/\]/g, '').split('.');
+	// arr = path.replace(/\[/g, '.').replace(/\]/g, '').split('.');
+	// 或者
+	arr = path.replace(/\[(\d+)\]/g, '.$1').split('.');
 	let result = obj;
 	// 遍历数组，如果有值就继续往下找，没有值就返回默认值
 	arr.forEach((item) => {
-		if (result[item] === undefined) {
+		try {
+			result = Object(result)[item] ?? defaultVal;
+		} catch (err) {
+			console.log('🚀 ~ err:', err);
+			console.log('🚀 ~ obj:', obj);
+			console.log('🚀 ~ path:', path);
 			result = defaultVal;
-		} else {
-			result = result[item];
+			return result;
 		}
 	});
 	return result;
