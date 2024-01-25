@@ -1,6 +1,12 @@
 {
 	"type": "module",
+	"scripts": {
+		"test": "vitest"
+	},
 	"dependencies": {
 		"lodash-es": "^4.17.21"
+	},
+	"devDependencies": {
+		"vitest": "^1.2.1"
 	}
 }

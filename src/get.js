@@ -1,9 +1,9 @@
 // lodash 的 get 是一个简单常用的读取对象的方法，会有一个默认返回值
 import { get } from 'lodash-es';
 const object = { a: [{ b: { c: 3 } }] };
-console.log(get(object, 'a[0].b.c')); // 3
-console.log(get(object, ['a', '0', 'b', 'c'])); // 3
-console.log(get(object, 'a.b.c', 'default')); // default
+// console.log(get(object, 'a[0].b.c')); // 3
+// console.log(get(object, ['a', '0', 'b', 'c'])); // 3
+// console.log(get(object, 'a.b.c', 'default')); // default
 
 // 实现只考虑这俩种：a.b.c, a[0].b.c
 /**
@@ -12,7 +12,7 @@ console.log(get(object, 'a.b.c', 'default')); // default
  * @param {*} defaultVal
  * @return {*}
  */
-function myGet(obj, path, defaultVal = undefined) {
+export function myGet(obj, path, defaultVal = undefined) {
 	// 先用正则替换，然后split成数组
 	let arr = [];
 	arr = path.replace(/\[/g, '.').replace(/\]/g, '').split('.');
@@ -27,5 +27,5 @@ function myGet(obj, path, defaultVal = undefined) {
 	});
 	return result;
 }
-console.log(myGet(object, 'a[0].b.c')); // 3
-console.log(myGet(object, 'a.b.c', 'default')); // default
+// console.log(myGet(object, 'a[0].b.c')); // 3
+// console.log(myGet(object, 'a.b.c', 'default')); // default
