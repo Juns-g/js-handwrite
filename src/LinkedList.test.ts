@@ -18,4 +18,7 @@ test('LinkedList', () => {
 	list.remove(3);
 	expect(list.toString()).toBe('2->1->3->null');
 	expect(list.getSize()).toBe(3);
+
+	list.reverse();
+	expect(list.toString()).toBe('3->1->2->null');
 });

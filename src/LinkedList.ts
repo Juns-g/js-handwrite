@@ -98,4 +98,17 @@ export class LinkedList {
 		str += 'null';
 		return str;
 	}
+	// 反转链表
+	reverse() {
+		if (this.size === 0 || this.size === 1) return;
+		let pre = null,
+			cur = this.dummyHead.next;
+		while (cur) {
+			let temp = cur.next;
+			cur.next = pre;
+			pre = cur;
+			cur = temp;
+		}
+		this.dummyHead.next = pre;
+	}
 }
