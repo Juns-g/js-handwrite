@@ -5,7 +5,8 @@
 	},
 	"dependencies": {
 		"lodash": "^4.17.21",
-		"lodash-es": "^4.17.21"
+		"lodash-es": "^4.17.21",
+		"ts-node": "^10.9.2"
 	},
 	"devDependencies": {
 		"vitest": "^1.2.1"

@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6"
+    },
+    "ts-node": {
+        "compilerOptions": {
+            "module": "commonjs"
+        },
+        "transpileOnly": true,
+        "files": true,
+        "esm": true
+    },
+    "include": [
+        "**/*.ts",
+        "src"
+    ],
+    "allowImportingTsExtensions": true
+}

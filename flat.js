@@ -1,6 +1,7 @@
 // 实现ES6中的flat方法
 // lodash也有类似的方法，用处一样的
 // 默认不传值就是扁平1层，传Infinity就是扁平所有层
+// 正则、递归、reduce、展开运算符等方法：https://juejin.cn/post/6844903872830554120
 
 export function myFlat(array, depth = 1) {
 	if (!Array.isArray(array)) throw new Error(`${array} must be an array`);
