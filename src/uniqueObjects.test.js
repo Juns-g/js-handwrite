@@ -15,6 +15,22 @@ test('uniqueObjects', () => {
 		{ id: 2, name: '222' },
 	];
 
+	const arrByName = [
+		{ name: '111', mark: '324234' },
+		{ name: '111', mark: '324234' },
+		{ name: '222', mark: '33' },
+		{ name: '222', mark: '33' },
+		{ name: '333', mark: '12' },
+	];
+
+	const ansByName = [
+		{ name: '111', mark: '324234' },
+		{ name: '222', mark: '33' },
+		{ name: '333', mark: '12' },
+	];
+
 	expect(uniqueObjects_1(arr)).toEqual(ans);
+	expect(uniqueObjects_1(arrByName, 'name')).toEqual(ansByName);
 	expect(uniqueObjects_2(arr)).toEqual(ans);
+	expect(uniqueObjects_2(arrByName, 'name')).toEqual(ansByName);
 });
