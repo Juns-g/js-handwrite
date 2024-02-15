@@ -1,0 +1,67 @@
+<!-- https://www.nowcoder.com/practice/a283d2c284ed49468c3b0f6ec0312b0f -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<script>
+			var vnode = {
+				tag: 'ul',
+				props: {
+					class: 'list',
+				},
+				text: '',
+				children: [
+					{
+						tag: 'li',
+						props: {
+							class: 'item',
+						},
+						text: '',
+						children: [
+							{
+								tag: undefined,
+								props: {},
+								text: '牛客网',
+								children: [],
+							},
+						],
+					},
+					{
+						tag: 'li',
+						props: {},
+						text: '',
+						children: [
+							{
+								tag: undefined,
+								props: {},
+								text: 'nowcoder',
+								children: [],
+							},
+						],
+					},
+				],
+			};
+			const _createElm = (vnode) => {
+				const { tag, props, text, children } = vnode;
+				let dom = document.createElement(tag);
+				_setAttr(dom, props);
+				dom.innerText = text || '';
+				children.forEach((child) => {
+					dom.appendChild(_createElm(child));
+				});
+				return dom;
+			};
+
+			const _setAttr = (el, attrs) => {
+				if (!Object.keys(attrs)) return;
+				for (let key in attrs) {
+					el.setAttribute(key, attrs[key]);
+				}
+			};
+			let node = _createElm(vnode);
+			document.body.appendChild(node);
+		</script>
+	</body>
+</html>

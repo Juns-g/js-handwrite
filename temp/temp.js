@@ -1,16 +1,32 @@
-const object = { a: [{ b: { c: 3 } }] };
-
-function get(obj, path) {
-	if (typeof path !== 'string') {
-		throw new Error('path must to be string');
+class Scheduler {
+	constructor() {
+		// 补充代码
 	}
-	const arr = path.replaceAll('[', '.').replaceAll(']', '').split('.');
-	console.log('🚀 ~ arr:', arr);
-	let ans = obj;
-	arr.forEach((item) => {
-		ans = ans[item] ?? undefined;
-	});
-	return ans;
+	add(promiseCreator) {
+		// 补充代码
+	}
 }
 
-console.log(get(object, 'a[0].b.c')); // 3
+const scheduler = new Scheduler();
+
+function timeout(time) {
+	return () =>
+		new Promise((resolve) => {
+			setTimeout(() => {
+				resolve();
+			}, time);
+		});
+}
+
+function addTask(time, order) {
+	scheduler.add(timeout(time)).then(() => {
+		console.log(order);
+	});
+}
+
+addTask(1000, '1');
+addTask(500, '2');
+addTask(300, '3');
+addTask(400, '4');
+
+// Scheduler最多支持两个正在处理的promise，最终打印顺序是2 3 1 4
