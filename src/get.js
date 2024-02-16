@@ -25,9 +25,6 @@ export function myGet(obj, path, defaultVal = undefined) {
 		try {
 			result = Object(result)[item] ?? defaultVal;
 		} catch (err) {
-			console.log('🚀 ~ err:', err);
-			console.log('🚀 ~ obj:', obj);
-			console.log('🚀 ~ path:', path);
 			result = defaultVal;
 			return result;
 		}
