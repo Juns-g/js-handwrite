@@ -33,3 +33,16 @@ export function strToArr_2(str) {
 }
 
 console.log('🚀 ~ strToArr_2(str):', strToArr_2(str));
+
+export function strToArr_3(str) {
+	return str
+		.trim()
+		.split('\n')
+		.map((line) =>
+			line
+				.split(' ')
+				.filter((item) => item !== '')
+				.map(Number),
+		);
+}
+console.log('🚀 ~ strToArr_3(str):', strToArr_3(str));
