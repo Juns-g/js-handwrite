@@ -1,32 +1,31 @@
-const obj = {
-	a: {
-		b: {
-			c: 2,
-			d: 5,
-		},
-		e: {
-			f: 1,
-			h: {
-				i: 3,
-			},
-		},
+// 第一次执行是a毫秒后，
+// 第二次执行是a+b毫秒后，
+// 第三次是a+2b毫秒，
+// 第N次执行是a+Nb毫秒后
+function myTimer(fn, a, b) {
+	let timer = null;
+	let count = 0;
+
+	function schedule() {
+		const delay = a + count * b;
+		timer = setTimeout(() => {
+			fn();
+			count++;
+			schedule();
+		}, delay);
+	}
+
+	schedule();
+
+	return function () {
+		clearTimeout(timer);
+	};
+}
+
+let stop = myTimer(
+	() => {
+		console.log(1);
 	},
-	j: 4,
-};
-
-const res = {};
-const flatten = (obj, k) => {
-	if (typeof obj === 'number') {
-		const key = k.slice(1).join('');
-		res[key] = obj;
-		return;
-	}
-
-	for (let key in obj) {
-		if (obj.hasOwnProperty(key)) {
-			flatten(obj[key], [...k, '.', key]);
-		}
-	}
-};
-flatten(obj, []);
-console.log(res);
+	1000,
+	2000,
+);
