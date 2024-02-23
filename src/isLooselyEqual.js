@@ -55,4 +55,3 @@ export const isLooselyEqual = (x, y) => {
 	}
 	return false;
 };
-
