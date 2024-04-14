@@ -18,9 +18,11 @@ var data = [
 	{ id: 0, parentId: null, name: '广东省' },
 ];
 function arrayToTree(arr) {
-	var map = {};
+	// const map: Record<number, DataItem> = {};
+	var map = new Map();
 	arr.forEach(function (item) {
-		map[item.id] = item;
+		// map[item.id] = item;
+		map.set(item.id, item);
 	});
 	var res = {};
 	for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
@@ -29,7 +31,8 @@ function arrayToTree(arr) {
 			res = item;
 			continue;
 		}
-		var parent_1 = map[item.parentId];
+		// let parent = map[item.parentId as number];
+		var parent_1 = map.get(item.parentId);
 		if (!(parent_1 === null || parent_1 === void 0 ? void 0 : parent_1.children)) {
 			parent_1.children = [];
 		} else {
@@ -40,4 +43,3 @@ function arrayToTree(arr) {
 	return res;
 }
 arrayToTree(data);
-// export {};

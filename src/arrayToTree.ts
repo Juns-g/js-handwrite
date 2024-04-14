@@ -28,9 +28,11 @@ const data: DataItem[] = [
 type TreeNode = DataItem & { children: DataItem[] };
 
 function arrayToTree(arr: DataItem[]) {
-	const map: Record<number, DataItem> = {};
+	// const map: Record<number, DataItem> = {};
+	const map = new Map();
 	arr.forEach((item) => {
-		map[item.id] = item;
+		// map[item.id] = item;
+		map.set(item.id, item);
 	});
 
 	let res = {};
@@ -40,13 +42,13 @@ function arrayToTree(arr: DataItem[]) {
 			res = item;
 			continue;
 		}
-		let parent = map[item.parentId as number];
+		// let parent = map[item.parentId as number];
+		let parent = map.get(item.parentId as number);
 		if (!parent?.children) {
 			parent.children = [];
 		} else {
 			parent.children.push(item);
 		}
-		console.log(item);
 	}
 	console.log('🚀 ~ res:', res);
 	return res;
