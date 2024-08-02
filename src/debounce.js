@@ -1,12 +1,14 @@
 function debounce(fn, wait = 500, immediate) {
-	let timer = null;
+	let timer = null
 	return function (...args) {
-		if (immediate) {
-			fn.apply(this, args);
-		}
-		timer && clearInterval(timer);
-		timer = setInterval(() => {
-			fn.apply(this.args);
-		}, wait);
-	};
+		const callNow = immediate && !timer
+
+		clearTimeout(timer)
+		timer = setTimeout(() => {
+			timer = null
+			if (!immediate) fn.apply(this, args)
+		}, wait)
+
+		callNow && fn.apply(this, args)
+	}
 }

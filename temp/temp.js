@@ -1,11 +1,8 @@
-const arr = []
-
-for (var i = 0; i < 3; i++) {
-	arr[i] = function () {
-		console.log(i)
-	}
+Function.prototype.myCall = function (context, ...args) {
+	context = context ? Object(context) : window
+	const fn = Symbol('fn')
+	context[fn] = this
+	const res = context[fn](...args)
+	delete context[fn]
+	return res
 }
-
-arr.forEach(function (item) {
-	item()
-})
