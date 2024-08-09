@@ -1,0 +1,39 @@
+<div class="btn">点我</div>
+
+<style>
+	.btn {
+		width: 300px;
+		height: 100px;
+		border-radius: 8px;
+		background-color: #5f9d84;
+		display: flex;
+		font-size: 30px;
+		align-items: center;
+		justify-content: center;
+	}
+</style>
+
+<script>
+	const btn = document.querySelector('div')
+	const fn = () => {
+		console.log(111)
+	}
+
+	const debounce = (cb, wait, immediate) => {
+		let timer = null
+		return function (...args) {
+			if (immediate && !timer) {
+				cb.apply(this, args)
+				timer = '11'
+			} else {
+				clearTimeout(timer)
+				timer = setTimeout(() => {
+					cb.apply(this, args)
+					timer = null
+				}, wait)
+			}
+		}
+	}
+
+	btn.onclick = debounce(fn, 600, true)
+</script>

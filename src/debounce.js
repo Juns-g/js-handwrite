@@ -12,3 +12,19 @@ function debounce(fn, wait = 500, immediate) {
 		callNow && fn.apply(this, args)
 	}
 }
+
+const debounce_2 = (cb, wait, immediate) => {
+	let timer = null
+	return function (...args) {
+		if (immediate && !timer) {
+			cb.apply(this, args)
+			timer = '11'
+		} else {
+			clearTimeout(timer)
+			timer = setTimeout(() => {
+				cb.apply(this, args)
+				timer = null
+			}, wait)
+		}
+	}
+}
