@@ -23,16 +23,15 @@ const arr2Tree = (data) => {
 	for (let item of data) map.set(item.id, item)
 	let tree = {}
 	for (let item of data) {
-		const node = map.get(item.id)
-		if (!node.parentId) {
-			tree = node
+		if (item.parentId === null) {
+			tree = item
 			continue
 		}
-		const parentNode = map.get(node.parentId)
+		const parentNode = map.get(item.parentId)
 		if (!parentNode?.children) {
-			parentNode.children = [node]
+			parentNode.children = [item]
 		} else {
-			parentNode.children.push(node)
+			parentNode.children.push(item)
 		}
 	}
 	return tree
