@@ -28,3 +28,24 @@ const debounce_2 = (cb, wait, immediate) => {
 		}
 	}
 }
+
+// 带取消
+const debounce_3 = (cb, wait, immediate) => {
+	let timer = null
+	function fn(...args) {
+		if (immediate && !timer) {
+			cb.apply(this, args)
+			timer = '11'
+		} else {
+			clearTimeout(timer)
+			timer = setTimeout(() => {
+				cb.apply(this, args)
+				timer = null
+			}, wait)
+		}
+	}
+	fn.cancel = () => {
+		clearTimeout(timer)
+	}
+	return fn
+}
