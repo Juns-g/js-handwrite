@@ -1,11 +1,4 @@
-type DataItem = {
-	id: number;
-	parentId: number | null;
-	name: string;
-	children?: DataItem[];
-};
-
-const data: DataItem[] = [
+const data = [
 	{ id: 12, parentId: 1, name: '朝阳区' },
 	{ id: 241, parentId: 24, name: '田林街道' },
 	{ id: 31, parentId: 3, name: '广州市' },
@@ -23,37 +16,24 @@ const data: DataItem[] = [
 	{ id: 33, parentId: 3, name: '东莞市' },
 	{ id: 3, parentId: 0, name: '广东省' },
 	{ id: 0, parentId: null, name: '广东省' },
-];
+]
 
-type TreeNode = DataItem & { children: DataItem[] };
-
-function arrayToTree(arr: DataItem[]) {
-	// const map: Record<number, DataItem> = {};
-	const map = new Map();
-	arr.forEach((item) => {
-		// map[item.id] = item;
-		map.set(item.id, item);
-	});
-
-	let res = {};
-
-	for (let item of arr) {
-		if (item.parentId === null) {
-			res = item;
-			continue;
-		}
-		// let parent = map[item.parentId as number];
-		let parent = map.get(item.parentId as number);
-		if (!parent?.children) {
-			parent.children = [];
+const arrayToTree = (data) => {
+	const map = new Map()
+	let tree = null
+	for (const node of data) {
+		node.children = []
+		map.set(node.id, node)
+	}
+	for (const node of data) {
+		const parentNode = map.get(node.parentId)
+		if (parentNode) {
+			parentNode.children.push(node)
 		} else {
-			parent.children.push(item);
+			tree = node
 		}
 	}
-	console.log('🚀 ~ res:', res);
-	return res;
+	return tree
 }
 
-arrayToTree(data);
-
-export {};
+console.log(arrayToTree(data))
